@@ -60,6 +60,10 @@ class Log_out(TokenReq):
         return Response(status=HTTP_204_NO_CONTENT)
     
 class Info(TokenReq):
+
+    def get(serf, request):
+        return Response({"user":request.user.display_name})
+    
     def put(self, request):
         try:
             data = request.data.copy()
