@@ -3,8 +3,9 @@ import App from './App'
 import HomePage from './pages/HomePage'
 import LogIn from './pages/LogIn'
 import SignUp from './pages/SignUp'
-import TaskPage from './pages/TaskPage'
-import { userConfirmation } from './utilities'
+import ListsPage from './pages/ListsPage'
+import { userConfirmation, getUsersLists } from './utilities'
+import NotFoundPage from './pages/NotFoundPage'
 
 const router = createBrowserRouter([
     {
@@ -17,8 +18,9 @@ const router = createBrowserRouter([
                 element:<HomePage/>
             },
             {
-                path:"/tasks/",
-                element:<TaskPage/>
+                path:"/lists/",
+                loader: getUsersLists,
+                element:<ListsPage/>
             },
             {
                 path:"/signup/",
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path:"/login/",
                 element: <LogIn/>
+            },
+            {
+                path:"*",
+                element:<NotFoundPage />
             }
         ]
     }

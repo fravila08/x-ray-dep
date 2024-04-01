@@ -55,3 +55,12 @@ export const userLogOut = async() => {
     }
     alert("Something went wrong and logout failed")
 }
+
+export const getUsersLists = async() => {
+    let response = await api.get("lists/")
+    if (response.status === 200){
+        return response.data
+    }
+    alert(response.data)
+    return []
+}

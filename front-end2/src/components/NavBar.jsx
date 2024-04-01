@@ -26,8 +26,8 @@ function NavBar({ setUser, user }) {
               </>
             ) : (
               <>
-                <Nav.Link as={Link} to="/tasks/">
-                  Tasks
+                <Nav.Link as={Link} to="/lists/">
+                  Lists
                 </Nav.Link>
                 <Button
                   variant="outline-danger"
