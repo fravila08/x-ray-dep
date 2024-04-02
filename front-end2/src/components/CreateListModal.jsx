@@ -18,8 +18,8 @@ function CreateListModal({ show, setShow, setLists, lists }) {
           <Modal.Title>Create a List</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ListForm 
-            handleClose={handleClose} 
+          <ListForm
+            handleClose={handleClose}
             setLists={setLists}
             lists={lists}
           />

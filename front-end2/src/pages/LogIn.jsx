@@ -13,7 +13,7 @@ const LogIn = () => {
     <>
       <h1>Log In</h1>
       <Form
-        onSubmit={async(e) => [
+        onSubmit={async (e) => [
           e.preventDefault(),
           setUser(await userLogIn(email, password)),
         ]}

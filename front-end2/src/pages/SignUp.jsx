@@ -7,21 +7,13 @@ import { userRegistration } from "../utilities";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser, user } = useOutletContext();
-  const navigate = useNavigate()
-
-  useEffect(()=>{
-    if(user){
-       alert("You are already signed in please log out to visit this page") 
-       navigate("/")
-    }
-  }, [])
+  const { setUser } = useOutletContext();
 
   return (
     <>
       <h1>SignUp</h1>
       <Form
-        onSubmit={async(e) => [
+        onSubmit={async (e) => [
           e.preventDefault(),
           setUser(await userRegistration(email, password)),
         ]}

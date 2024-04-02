@@ -10,10 +10,8 @@ import "./App.css";
 
 function App() {
   const [user, setUser] = useState(useLoaderData());
-  const [itemCreated, setItemCreated] = useState(null)
   const location = useLocation();
   const navigate = useNavigate();
-
 
   useEffect(() => {
     let nullUserUrls = ["/login/", "/signup/"];
@@ -28,7 +26,7 @@ function App() {
   return (
     <>
       <NavBar setUser={setUser} user={user} />
-      <Outlet context={{ user, setUser, itemCreated, setItemCreated}} />
+      <Outlet context={{ user, setUser }} />
     </>
   );
 }
