@@ -28,7 +28,18 @@ class Sign_up(APIView):
             new_user.save()
             login(request, new_user)
             token = Token.objects.create(user = new_user)
-            return Response({"user":new_user.display_name, "token":token.key}, status=HTTP_201_CREATED)
+            response = Response({"user":new_user.display_name}, status=HTTP_201_CREATED)
+            life_time = datetime.now()+timedelta(days=7)
+            flife_time = life_time.strftime("%a, %d %b %Y %H:%M:%S GMT")
+            response.set_cookie(
+                key='token',
+                value=token.key,
+                httponly=True,
+                secure=True,
+                samesite="Lax",
+                expires=flife_time
+            )
+            return response
         except ValidationError as e:
             print(e)
             return Response(e, status=HTTP_400_BAD_REQUEST)
@@ -65,7 +76,9 @@ class Log_out(TokenReq):
     def post(self, request):
         request.user.auth_token.delete()
         logout(request)
-        return Response(status=HTTP_204_NO_CONTENT)
+        response = Response(status=HTTP_204_NO_CONTENT)
+        response.delete_cookie('token')
+        return response
     
 class Info(TokenReq):
 
