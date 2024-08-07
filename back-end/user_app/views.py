@@ -10,7 +10,7 @@ from rest_framework.status import (
     HTTP_400_BAD_REQUEST
 )
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication
+from token_auth import CookieAuthentication
 from rest_framework.authtoken.models import Token
 from .models import App_user
 from datetime import datetime, timedelta
@@ -69,7 +69,7 @@ class Log_in(APIView):
     
 class TokenReq(APIView):
 
-    authentication_classes=[TokenAuthentication]
+    authentication_classes=[CookieAuthentication]
     permission_classes = [IsAuthenticated]
 
 class Log_out(TokenReq):
