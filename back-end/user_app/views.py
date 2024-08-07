@@ -13,6 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
 from .models import App_user
+from datetime import datetime, timedelta
 
 # Create your views here.
 class Sign_up(APIView):
@@ -40,12 +41,19 @@ class Log_in(APIView):
         print(user)
         if user:
             login(request, user)
-            # if
-            # return SELECT * token WHERE user = user
-            # else
-            # return INSERT token (user) VALUES (user)
             token, created = Token.objects.get_or_create(user = user)
-            return Response({"user":user.display_name, "token":token.key}, status=HTTP_200_OK)
+            response = Response({"user":user.display_name}, status=HTTP_200_OK)
+            life_time = datetime.now()+timedelta(days=7)
+            flife_time = life_time.strftime("%a, %d %b %Y %H:%M:%S GMT")
+            response.set_cookie(
+                key='token',
+                value=token.key,
+                httponly=True,
+                secure=True,
+                samesite="Lax",
+                expires=flife_time
+            )
+            return response
         return Response("No user matching credentials", status=HTTP_400_BAD_REQUEST)
     
 class TokenReq(APIView):
