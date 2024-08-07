@@ -10,7 +10,7 @@ from rest_framework.status import (
     HTTP_400_BAD_REQUEST
 )
 from rest_framework.permissions import IsAuthenticated
-from token_auth import CookieAuthentication
+from user_app.token_auth import CookieAuthentication
 from rest_framework.authtoken.models import Token
 from .models import App_user
 from datetime import datetime, timedelta
