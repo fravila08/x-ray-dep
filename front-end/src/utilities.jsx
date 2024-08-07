@@ -6,11 +6,16 @@ export const api = axios.create({
 });
 
 export const userConfirmation = async () => {
+  try{
   let response = await api.get("users/");
   if (response.status === 200) {
     return response.data.user;
   }
   return null;
+}
+catch(err){
+  return null
+}
 };
 
 export const userRegistration = async (email, password) => {
